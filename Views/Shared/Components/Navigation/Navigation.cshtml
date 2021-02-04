@@ -1,0 +1,114 @@
+@model COPC_Wiki.Models.WikiPages
+<body>
+    <nav class="nav">
+      <ul>
+        <li class="active">
+            <a asp-area="" asp-controller="Home" asp-action="Index">Welcome</a>
+        </li>
+        @foreach (var m in Model.wikiPages)
+        {
+            <li>
+                <a href="#@m.Slug" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">@m.Topic</a>
+                <ul class="collapse list-unstyled" id="@m.Slug">
+                    @if(@m.Subheading != null)
+                    {
+                        @foreach (var sub in @m.Subheading)
+                        {
+
+                            <a href="#Subhead_@sub.Id" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">@sub.Topic</a>
+                            <ul class="collapse list-unstyled" id="Subhead_@sub.Id">
+                                @if (@sub.Articles != null)
+                                {
+                                    @foreach (var article in @sub.Articles)
+                                    {
+                                        <li>
+                                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Article" asp-route-SlugQuery=@article.Slug>@article.Title</a>
+                                        </li>
+                                        
+                                    }
+                                }
+                            </ul>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+      </ul>
+    </nav>
+    <style>
+        nav {
+            position: relative;
+            margin: 0 15%;
+            text-align: left;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            max-height: inherit;
+            padding-top: 15% !important;
+            display: flex;
+            
+
+        }
+        .nav ul {
+            list-style: none;
+            padding: 0px !important;
+            
+            
+        }
+        .nav ul li {
+            position: relative;
+            margin: 3.2em 0;
+            
+        }
+        .nav ul ul ul li
+        {
+            margin: 0.4em 0;
+        }
+        .nav ul li a {
+            line-height: 5em;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 0.4em;
+            color: rgba(255, 255, 255, 0.35);
+            display: block;
+            transition: all ease-out 300ms;
+            font-size: 1.5em;
+            
+        }
+        .nav ul li.active a {
+            color: white;
+        }
+        .nav ul li:not(.active)::after {
+            opacity: 0.2;
+            
+        }
+        .nav ul li:not(.active):hover a {
+            color: rgba(255, 255, 255, 0.75);
+        }
+        .nav ul li::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 0.2em;
+            background: black;
+            left: 0;
+            bottom: 0;
+            background-image: linear-gradient(to right, #5e42a6, #b74e91);
+        }
+        .dropdown-toggle::after {
+            display:none;
+        }
+        ul ul a {
+            font-size: 1.0em !important;
+            padding-left: 50px;
+            
+        }
+        
+        ul ul ul a {
+            font-size: 0.8em !important;
+            margin-left: 20px !important;
+            padding-left: 75px !important;
+        }
+        
+    </style>
+</body>

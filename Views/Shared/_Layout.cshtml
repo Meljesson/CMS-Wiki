@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - COPC_Wiki</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+</head>
+<main class="main">
+  <aside class="sidebar">
+    @await Component.InvokeAsync("Navigation")
+  </aside>
+
+  <section class="WikiPage">
+	  @RenderBody()
+  </section>
+
+
+ <style>
+	html 
+	{
+		font-family: Arial;
+		font-size: 16px;
+		background: white;
+		
+	}
+	.sidebar
+	{
+		position: fixed;
+		width: 25%;
+		min-height: 100vh;
+		height: 100vh;
+		max-height: 100vh;
+		background: #312450;
+		font-size: 0.65em;
+		overflow-y: auto;
+	}
+	 /* Hide scrollbar for Chrome, Safari and Opera */
+	.sidebar::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.sidebar {
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+	} 
+	
+ 	.WikiPage 
+	{
+		position: relative;
+		width: 75%;
+		float: right;
+		height: 100vh;
+	}
+	
+
+	
+	@@media only screen and (max-width: 1000px) 
+	{
+	
+		.nav ul li a {
+            font-size: 1.1em;
+        }
+		.nav ul ul a {
+            font-size: 0.8em !important;
+			padding-left: 25px !important;
+        }
+
+        .nav ul ul ul a {
+            font-size: 0.65em !important;
+			padding-left: 40px !important;
+        }
+		
+	}
+	@@media only screen and (max-width: 800px) 
+	{
+	
+		.nav ul li a {
+            font-size: .6em;
+        }
+		.nav ul ul a {
+            font-size: 0.5em !important;
+			padding-left: 15px !important;
+        }
+
+        .nav ul ul ul a {
+            font-size: 0.4em !important;
+			padding-left: 30px !important;
+        }
+		
+	}
+
+	@@media only screen and (max-width: 450px) 
+	{
+	
+		.sidebar
+		{
+			height: 120vh;
+		}
+		.contentbody
+		{
+			font-size: .6em;
+		}
+		.nav ul li a {
+            font-size: .55em;
+        }
+		.nav ul ul a {
+			font-size: 0.35em !important;
+            padding-left: 10px !important;
+        }
+
+        .nav ul ul ul a {
+            padding-left: 15px !important;
+			font-size: 0.4em !important;
+        }
+		
+	}
+ </style>
+</main>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</html>
